@@ -1,5 +1,5 @@
 {
-  "name": "simple-performance-monitoring",
+  "name": "@raymondjkelly/simple-performance-monitoring",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
