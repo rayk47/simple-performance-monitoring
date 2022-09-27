@@ -22,6 +22,7 @@ export class SimplePerformanceMonitor {
       throw new Error('Use SimplePerformanceMonitor.instance instead of new()');
     }
     SimplePerformanceMonitor._instance = this;
+    this.mapOfTrackers = {};
   }
 
   static get instance() {
@@ -36,7 +37,7 @@ export class SimplePerformanceMonitor {
    * @param key the key that should be used to find and start/update the tracker
    */
   static startTracker(key: string) {
-    if (SimplePerformanceMonitor.instance.mapOfTrackers[key] === undefined) {
+    if (SimplePerformanceMonitor.instance?.mapOfTrackers?.[key] === undefined) {
       SimplePerformanceMonitor.instance.mapOfTrackers[key] = {
         startTime: 0,
         endTime: 0,
@@ -55,19 +56,22 @@ export class SimplePerformanceMonitor {
    * @param key the key that should be used to find and stop the tracker
    */
   static stopTracker(key: string) {
-    if (SimplePerformanceMonitor.instance.mapOfTrackers[key] === undefined) {
+    if (SimplePerformanceMonitor.instance.mapOfTrackers?.[key] === undefined) {
       console.log(
         `SimplePerformanceMonitor - Tracker does not exist for ${key} so the operation of stopping the tracker could not be completed`
       );
+      return;
     }
     if (
-      SimplePerformanceMonitor.instance.mapOfTrackers[key].startTime ===
+      SimplePerformanceMonitor.instance.mapOfTrackers?.[key].startTime ===
       undefined
     ) {
       console.log(
         `SimplePerformanceMonitor - Attempted to stop the tracker for ${key} but the tracker has not yet been started`
       );
+      return;
     } else {
+      SimplePerformanceMonitor.instance.mapOfTrackers[key].endTime = Date.now();
       SimplePerformanceMonitor.instance.mapOfTrackers[key].endCount =
         SimplePerformanceMonitor.instance.mapOfTrackers[key].endCount + 1;
       SimplePerformanceMonitor.instance.mapOfTrackers[key].totalTime =
