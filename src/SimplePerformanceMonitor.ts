@@ -93,9 +93,9 @@ export class SimplePerformanceMonitor {
       const averageTime = new Date(
         indexedItem.totalTime / indexedItem.endCount
       );
-      const validMessage = `SimplePerformanceMonitor -  ${key} Total[ ${totalTime.getMinutes()}:${totalTime.getSeconds()}:${totalTime.getMilliseconds()} ] Average[ ${averageTime.getMinutes()}:${
-        averageTime.getSeconds
-      }:${averageTime.getMilliseconds()}] Called[${indexedItem.endCount}]`;
+      const validMessage = `SimplePerformanceMonitor -  ${key} Total[ ${totalTime.getMinutes()}:${totalTime.getSeconds()}:${totalTime.getMilliseconds()} ] Average[ ${averageTime.getMinutes()}:${averageTime.getSeconds()}:${averageTime.getMilliseconds()}] Called[${
+        indexedItem.endCount
+      }]`;
       console.log(validMessage);
     }
   }
